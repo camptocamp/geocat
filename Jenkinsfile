@@ -130,5 +130,9 @@ dockerBuild {
     stage ('Destroy deployer container') {
        destroyContainer(deployContainerName)
     }
+
+    stage ('Archive') {
+        archive 'web/target/*.war'
+    }
   } // stage
 } // dockerBuild
