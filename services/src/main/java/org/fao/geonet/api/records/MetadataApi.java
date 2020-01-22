@@ -158,8 +158,10 @@ public class MetadataApi implements ApplicationContextAware {
         HttpServletRequest request
     )
         throws Exception {
+
+        AbstractMetadata metadata;
         try {
-            ApiUtils.canViewRecord(metadataUuid, request);
+            metadata = ApiUtils.canViewRecord(metadataUuid, request);
         } catch (SecurityException e) {
             Log.debug(API.LOG_MODULE_NAME, e.getMessage(), e);
             throw new NotAllowedException(ApiParams.API_RESPONSE_NOT_ALLOWED_CAN_VIEW);
@@ -167,6 +169,10 @@ public class MetadataApi implements ApplicationContextAware {
         List<String> accept = Arrays.asList(acceptHeader.split(","));
 
         String defaultFormatter = "xsl-view";
+        if (metadata.getDataInfo().getSchemaId().equalsIgnoreCase("iso19139.che")) {
+            defaultFormatter = "full_view";
+        }
+
         if (accept.contains(MediaType.TEXT_HTML_VALUE)
             || accept.contains(MediaType.APPLICATION_XHTML_XML_VALUE)
             || accept.contains("application/pdf")) {
