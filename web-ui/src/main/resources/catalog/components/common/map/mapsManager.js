@@ -155,9 +155,12 @@
           var map = new ol.Map({
             layers: [],
             view: new ol.View({
-              center: [0, 0],
-              projection: gnMap.getMapConfig().projection,
-              zoom: 2
+                resolutions: [1250, 1000, 750, 650, 500, 250, 100, 50, 20,
+                  10, 5, 2.5, 2, 1, 0.5, 0.25, 0.1],
+                extent: [-800000, -70000, 2500000, 1400000],
+                projection: 'EPSG:21781',
+                center: [660000, 190000],
+                zoom: 3
             }),
             // show zoom control in editor maps only
             controls: type !== this.EDITOR_MAP ? [new ol.control.Attribution()] : [
