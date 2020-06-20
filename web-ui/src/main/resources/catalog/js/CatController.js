@@ -266,7 +266,8 @@ goog.require('gn_alert');
           },
           'map-editor': {
             'context': '../../map/config-viewer.xml',
-            'extent': [0, 0, 0, 0]
+            'extent': [0, 0, 0, 0],
+            'layers': []
           },
           'autoFitOnLayer': false
         },
